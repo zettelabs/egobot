@@ -5,19 +5,21 @@ const hashnode = require("../../hashnode");
 exports.handler = async (event) => {
     const {message} = JSON.parse(event.body);
     const {command, botName, extra} = messageParts(message.text);
-    await sendMessage(message.chat.id, command)
     if (botName === "TgEgoBot" || botName === null) {
         switch (command) {
-            case "echo":
-                await sendMessage(message.chat.id, extra || "ECHO!");
+            case "stop":
+                await sendMessage(message.chat.id, extra || "STOPPED!");
                 break;
 
-            case "hashnodefeatured":
-                const {storiesFeed} = await hashnode.getFeaturedPosts().then((async result => {
-                    console.log("storiesFeed " + result)
+            case "start":
+                await sendMessage(message.chat.id, extra || "STARTED!");
+                var intervalId = setInterval(async function () {
+                    await hashnode.getFeaturedPosts().then((async result => {
+                        console.log("storiesFeed " + result)
+                        await sendMessage(message.chat.id, result + "a");
+                    }));
+                }, 20000);
 
-                    await sendMessage(message.chat.id, result + "a");
-                }));
 
                 break;
 
@@ -25,6 +27,12 @@ exports.handler = async (event) => {
                 await sendMessage(message.chat.id, "I don't understand that command.");
         }
     }
+
+
+
+// You can clear a periodic function by uncommenting:
+// clearInterval(intervalId);
+
 
     return {statusCode: 200};
 };
