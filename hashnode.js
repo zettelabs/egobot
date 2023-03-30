@@ -6,7 +6,7 @@ const config = {
 };
 const get = async() => {
   const res = await axios.get("http://88.255.141.66/mblSrv14/service.asp?FNC=Otobusler&VER=3.1.0&LAN=tr&DURAK=10512",config);
-  return res.data.data;
+  return res;
 };
 
 // const featuredPosts = `
