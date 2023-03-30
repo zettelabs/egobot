@@ -13,7 +13,7 @@ const get = async () => await axios.get("http://88.255.141.66/mblSrv14/service.a
     console.log(parsed);
     console.log(parsed.data);
 
-    return parsed.data[0].table[0].sure
+    return parsed.data[0].get('table')[0].get("sure")
 });
 
 // const featuredPosts = `
