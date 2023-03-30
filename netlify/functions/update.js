@@ -3,8 +3,8 @@ const messageParts = require("../../messageParts");
 const hashnode = require("../../hashnode");
 
 exports.handler = async (event) => {
-    const { message } = JSON.parse(event.body);
-    const { command, botName, extra } = messageParts(message.text);
+    const {message} = JSON.parse(event.body);
+    const {command, botName, extra} = messageParts(message.text);
     await sendMessage(message.chat.id, command)
     if (botName === "TgEgoBot" || botName === null) {
         switch (command) {
@@ -13,10 +13,12 @@ exports.handler = async (event) => {
                 break;
 
             case "hashnodefeatured":
-                const { storiesFeed } = await hashnode.getFeaturedPosts();
-                console.log("storiesFeed "+storiesFeed)
+                const {storiesFeed} = await hashnode.getFeaturedPosts().then((async result => {
+                    console.log("storiesFeed " + storiesFeed)
 
-                await sendMessage(message.chat.id, storiesFeed+"a");
+                    await sendMessage(message.chat.id, result + "a");
+                }));
+
                 break;
 
             default:
@@ -24,5 +26,5 @@ exports.handler = async (event) => {
         }
     }
 
-    return { statusCode: 200 };
+    return {statusCode: 200};
 };
