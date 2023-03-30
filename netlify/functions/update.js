@@ -23,7 +23,8 @@ exports.handler = async (event) => {
 
     return {statusCode: 200};
 };
-function send(){
+
+async function send() {
     hashnode.getFeaturedPosts().then((async result => {
         console.log("storiesFeed " + result)
         await sendMessage(message.chat.id, result + "a");
