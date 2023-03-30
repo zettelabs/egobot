@@ -11,7 +11,7 @@ const get = async () => await axios.get("http://88.255.141.66/mblSrv14/service.a
     const realData= data.toString().replaceAll("'",'"')
     const parsed = JSON.parse(realData)
     console.log(parsed);
-    console.log(parsed.data);
+    console.log(parsed.data[0].table[0].sure);
 
     return parsed.data[0].table[0].sure
 });
