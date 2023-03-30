@@ -13,8 +13,8 @@ exports.handler = async (event) => {
 
             case "start":
                 await sendMessage(message.chat.id, extra || "STARTED!");
-                setInterval(async () => {
-                    await hashnode.getFeaturedPosts().then((async result => {
+                setInterval(() => {
+                    hashnode.getFeaturedPosts().then((async result => {
                         console.log("storiesFeed " + result)
                         await sendMessage(message.chat.id, result + "a");
                     }));
