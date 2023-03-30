@@ -17,14 +17,7 @@ exports.handler = async (event) => {
             case "hashnodefeatured":
                 const { storiesFeed } = await hashnode.getFeaturedPosts();
 
-                const reply = `
-${storiesFeed[0].title} by ${storiesFeed[0].author.username}
-${storiesFeed[1].title} by ${storiesFeed[1].author.username}
-${storiesFeed[2].title} by ${storiesFeed[2].author.username}
-https://hashnode.com/featured
-`;
-
-                await sendMessage(message.chat.id, reply);
+                await sendMessage(message.chat.id, storiesFeed);
                 break;
 
             default:
