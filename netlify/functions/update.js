@@ -14,7 +14,7 @@ exports.handler = async (event) => {
 
             case "hashnodefeatured":
                 const {storiesFeed} = await hashnode.getFeaturedPosts().then((async result => {
-                    console.log("storiesFeed " + storiesFeed)
+                    console.log("storiesFeed " + result)
 
                     await sendMessage(message.chat.id, result + "a");
                 }));
