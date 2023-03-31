@@ -12,10 +12,11 @@ exports.handler = async (event) => {
                 break;
 
             case "start":
-                 sendMessage(message.chat.id, extra || "STARTED!");
-                hashnode.getFeaturedPosts().then((async result => {
-                     sendMessage(message.chat.id, result + "a");
+                await sendMessage(message.chat.id, extra || "STARTED!");
+                await hashnode.getFeaturedPosts().then((async result => {
+                    await sendMessage(message.chat.id, result + "a");
                 }));
+
                 break;
 
             default:
@@ -23,9 +24,10 @@ exports.handler = async (event) => {
         }
     }
 
+
+// You can clear a periodic function by uncommenting:
+// clearInterval(intervalId);
+
+
     return {statusCode: 200};
 };
-
-async function send() {
-
-}
