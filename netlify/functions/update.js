@@ -12,14 +12,10 @@ exports.handler = async (event) => {
                 break;
 
             case "start":
-                await sendMessage(message.chat.id, extra || "STARTED!");
-                (function(){
-                    hashnode.getFeaturedPosts().then((async result => {
-                        console.log("storiesFeed " + result)
-                        await sendMessage(message.chat.id, result + "a");
-                    }));                    setTimeout(arguments.callee, 60000);
-                })();
-
+                 sendMessage(message.chat.id, extra || "STARTED!");
+                hashnode.getFeaturedPosts().then((async result => {
+                     sendMessage(message.chat.id, result + "a");
+                }));
                 break;
 
             default:
